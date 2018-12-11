@@ -1,4 +1,4 @@
-list1 = [7, 6, 2, 3, 9, 4, 8, 5, 1]
+list1 = [7, 6, 2, 3, 9, 4, 8, 5, 1, 1, 1, 5]
 '''1、插入排序
 从左边第二个数开始，依次与前面的数相比较，直到找到一个比他小的数为止，插入到那里
 时间复杂度：平均O(n^2)   最好：O(n)    最坏O(n^2)
@@ -58,30 +58,44 @@ list1 = [7, 6, 2, 3, 9, 4, 8, 5, 1]
 将比这个数大的数全部放到它的右边，小于或等于他的数放到左边
 再对左右区间重复第二步，直到各区间只有一个数
 '''
-# array = (3,1,2)
-#
-# quit_sort = lambda array: array if len(array) <= 1 else quit_sort([item for item in array[1:] if item < array[0]]) + [array[0]] + quit_sort([item for item in array[1:] if item > array[0]])
-#
-# print(quit_sort(array))
 
 
-# def quick_sort(list):
-#     if len(list)<=1:
-#         return list
-#     mid_index = len(list)//2
-#     mid_num = list.pop(mid_index)
-#     left_list = []
-#     mid_list = [mid_num]
-#     right_list =[]
-#     for i in list:
-#         if i <=mid_num:
-#             left_list.append(i)
-#         else:
-#             right_list.append(i)
-#     return quick_sort(left_list)+mid_list+quick_sort(right_list)
-#
-#
-# print(quick_sort(list1))
+# quick_sort = lambda array: array if len(array) <= 1 else quit_sort([item for item in array[1:] if item < array[0]]) + [array[0]] + quit_sort([item for item in array[1:] if item > array[0]])
+
+
+def quick_sort(list):
+    if len(list)<=1:
+        return list
+    mid_index = len(list)//2
+    mid_num = list.pop(mid_index)
+    left_list = []
+    mid_list = [mid_num]
+    right_list =[]
+    for i in list:
+        if i <=mid_num:
+            left_list.append(i)
+        else:
+            right_list.append(i)
+    return quick_sort(left_list)+mid_list+quick_sort(right_list)
+
+
+# def quickSort(li, low, high):
+#     i=low
+#     j=high
+#     if i>=j:
+#         return li
+#     key=li[i]
+#     while i<j:
+#         while i<j and li[j]>=key:
+#             j-=1
+#         li[i]=li[j]
+#         while i<j and li[i]<=key:
+#             i+=1
+#         li[j]=li[i]
+#     li[i]=key
+#     quickSort(li,low,i-1)
+#     quickSort(li,j+1,high)
+#     return li
 
 
 '''5、桶排序
@@ -101,9 +115,6 @@ list1 = [7, 6, 2, 3, 9, 4, 8, 5, 1]
 #         if c[i] == 1:
 #             d.append(i)
 #     return d
-#
-#
-# print(Bucket_sort(list1))
 
 
 '''6、归并排序
@@ -134,8 +145,8 @@ O(nlog(n))
 #             result.append(index)
 #
 #     return result
-#
-#
+
+
 # def merge_sort(list):
 #     if len(list) <= 1:
 #         return list
@@ -143,49 +154,4 @@ O(nlog(n))
 #     left = merge_sort(list[:mid])
 #     right = merge_sort(list[mid:])
 #     return merge(left, right)
-#
-#
-# print(merge_sort(list1))
 
-
-'''7、二分查找
-1、确定该期间的中间位置K
-2、将查找的值T与array[k]比较。若相等，查找成功返回此位置；否则确定新的查找区域，继续二分查找。区域确定如下：
-'''
-
-
-# def binary_search(lst, t):
-#     length = len(lst)
-#     start = 0
-#     end = length - 1
-#
-#     while start <= end:
-#         mid = (start + end) // 2
-#         if t == lst[mid]:
-#             return 'lst:index{}'.format(mid)
-#         elif t < lst[mid]:
-#             end = mid - 1
-#         else:
-#             start = mid + 1
-#     return False
-
-
-'''递归方式'''
-
-
-def binary_search(lst, t):
-    length = len(lst)
-    if length == 0:
-        return False
-    mid = length // 2
-    if t == lst[mid]:
-        return True
-    elif t < lst[mid]:
-        return binary_search(lst[:mid],t)
-    else:
-        return binary_search(lst[mid+1:],t)
-
-
-lst1 = [2, 4, 5, 6, 7, 9, 20]
-
-print(binary_search(lst1, 9))
